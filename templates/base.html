@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles/base_nav.css">
+</head>
+<body>
+
+<ul>
+    {% if request.user.is_authenticated %}
+        <li >
+            <a href="{% url 'main_page' %}">Main page</a>
+        </li>
+        <li>
+            <a>Welcome {{ request.user.first_name }} {{ request.user.last_name }}</a>
+        </li>
+        <li>
+            <a href="{% url 'profile_details' user.pk %}">Profile details</a>
+        </li>
+        <li>
+            <a href="{% url 'add_tool' %}">Add tool</a>
+        </li>
+        <li>
+            <a href="{% url 'logout_user' %}">Logout</a>
+        </li>
+
+    {% else %}
+        <li >
+            <a href="{% url 'main_page' %}">Main page</a>
+        </li>
+        <li>
+            <a>No user logged in</a>
+        </li>
+        <li>
+            <a href="{% url 'register_user' %}">Register</a>
+        </li>
+        <li>
+            <a href="{% url 'login_user' %}">Login</a>
+        </li>
+    {% endif %}
+</ul>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

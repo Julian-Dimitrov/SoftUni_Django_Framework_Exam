@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/static/styles/pic_size.css">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>Main page of the hardware store.</h1>
+
+<form action="{% url 'main_page' %}" method="get">
+    {% csrf_token %}
+    {{ form.search }}
+    {{ form.filter_field }}
+    <button>Search</button>
+</form>
+
+<form action="{% url 'main_page' %}" method="get">
+    <button>Clear filters</button>
+</form>
+
+<ul>
+    {% for tool in object_list %}
+        <li>
+
+            <div class="image-container">
+                <a href="{%  url 'details_tool' tool.user tool.slug %}">
+                    <img src="{{ tool.tool_photo }}" alt="The photo for this tool can't be accessed right now.">
+                </a>
+            </div>
+
+            <div>Product: {{ tool.name }}</div>
+            <div>Seller: {{ tool.user }}</div>
+            <div>Price: {{ tool.tool_price }} €</div>
+            <div>Location: {{ tool.tool_city }}, {{ tool.tool_country }}</div>
+        </li>
+    {% endfor %}
+</ul>
+
+{% if page_obj.has_previous %}
+    <a href="?search={{ request.GET.search }}&filter_field={{ request.GET.filter_field }}&page={{ page_obj.previous_page_number }}">&lt;</a>
+{% endif %}
+
+{{ page_obj.number }} / {{ paginator.num_pages }}
+
+{% if page_obj.has_next %}
+    <a href="?search={{ request.GET.search }}&filter_field={{ request.GET.filter_field }}&page={{ page_obj.next_page_number }}">&gt;</a>
+{% endif %}
+
+</body>
+</html>
+
+{% endblock %}

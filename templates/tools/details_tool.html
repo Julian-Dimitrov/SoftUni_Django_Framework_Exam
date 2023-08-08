@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/static/styles/pic_size.css">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>details tool</h1>
+
+<div class="image-container">
+    <img src="{{ tool.tool_photo }}" alt="The photo for this tool can't be accessed right now.">
+</div>
+<ul>
+    <div>
+        <a>Product: {{ tool.name }}</a>
+    </div>
+
+    <div>
+        <a>Description: {{ tool.description }}</a>
+    </div>
+    <div>
+        <a>Location: {{ tool.tool_city }}, {{ tool.tool_country }}</a>
+    </div>
+    <div>
+        <a>Price: {{ tool.tool_price }} €</a>
+    </div>
+
+    {% if request.user.is_authenticated %}
+        <li>
+            <a>Seller: {{ tool.user }}</a>
+            <a href="{% url 'profile_details' tool.user.pk %}">See user's profile.</a>
+        </li>
+    {% else %}
+        <a>Seller: {{ tool.user }}</a>
+        In order to visit the seller profile <a href="{% url 'login_user' %}">login</a> or <a href="{% url 'register_user' %}">register</a>.
+    {% endif %}
+
+    {% if request.user.id == tool.user.id %}
+        <div>
+            <a href="{% url 'edit_tool' tool.user tool.slug %}">Edit tool.</a>
+        </div>
+        <div>
+            <a href="{% url 'delete_tool' tool.user tool.slug %}">Delete tool.</a>
+        </div>
+    {% else %}
+    {% endif %}
+
+</ul>
+
+</body>
+</html>
+{% endblock %}
