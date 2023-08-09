@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load tz %}
 
 {% block content %}
 
@@ -42,6 +43,7 @@
             <div>Seller: {{ tool.user }}</div>
             <div>Price: {{ tool.tool_price }} €</div>
             <div>Location: {{ tool.tool_city }}, {{ tool.tool_country }}</div>
+            <div>Last edit: {{ tool.last_edit|timezone:"Europe/Sofia" }}</div>
         </li>
     {% endfor %}
 </ul>

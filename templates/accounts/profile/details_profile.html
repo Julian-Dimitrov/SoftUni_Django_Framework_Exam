@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load tz %}
 
 {% block content %}
 
@@ -26,6 +27,9 @@
         </p>
         <p>
             Full name: {{ object.first_name }} {{ object.last_name }}
+        </p>
+        <p>
+            User since: {{ object.created_on|timezone:'Europe/Sofia' }}
         </p>
         <p>
             Description about {{ object.first_name }}:

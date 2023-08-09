@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load tz %}
+
 {% block content %}
 
 <!doctype html>
@@ -31,6 +33,9 @@
     </div>
     <div>
         <a>Price: {{ tool.tool_price }} €</a>
+    </div>
+    <div>
+        <a>Last edit: {{ tool.last_edit|timezone:"Europe/Sofia" }}</a>
     </div>
 
     {% if request.user.is_authenticated %}

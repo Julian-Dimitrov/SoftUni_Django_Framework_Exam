@@ -3,9 +3,10 @@ from django.contrib.auth import models as auth_models
 from django.core.validators import MinLengthValidator
 from django.utils.text import slugify
 from .validators import validate_isalpha, validate_phone_number
+from datetime import datetime
 
 
-class HwStoreUser(auth_models.AbstractUser):  # napravi validatori na imenata
+class HwStoreUser(auth_models.AbstractUser):
     FIRST_NAME_MIN_LENGTH = 2
     FIRST_NAME_MAX_LENGTH = 30
     LAST_NAME_MIN_LENGTH = 2
@@ -41,8 +42,12 @@ class HwStoreUser(auth_models.AbstractUser):  # napravi validatori na imenata
         blank=True
     )
 
+    created_on = models.DateTimeField(
+        auto_now_add=datetime.now()
+    )
 
-class PhoneNumbersUserModel(models.Model):  # napravi validatori za telefonnite nomera
+
+class PhoneNumbersUserModel(models.Model):
     phone = models.CharField(
         max_length=13,
         default=None,

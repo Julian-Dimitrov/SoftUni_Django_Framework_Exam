@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from Olx_hardware_store.settings import AUTH_USER_MODEL
+from datetime import datetime
 
 UserModel = get_user_model()
 
@@ -28,6 +29,10 @@ class Tool(models.Model):  # napravi created_on
     tool_price = models.DecimalField(
         max_digits=6,
         decimal_places=2
+    )
+
+    last_edit = models.DateTimeField(
+        auto_now=datetime.now()
     )
 
     slug = models.SlugField(
