@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import models as auth_models
 from django.core.validators import MinLengthValidator
 from django.utils.text import slugify
+from .validators import validate_isalpha, validate_phone_number
 
 
 class HwStoreUser(auth_models.AbstractUser):  # napravi validatori na imenata
@@ -12,14 +13,14 @@ class HwStoreUser(auth_models.AbstractUser):  # napravi validatori na imenata
 
     first_name = models.CharField(
         max_length=FIRST_NAME_MAX_LENGTH,
-        validators=[MinLengthValidator(FIRST_NAME_MIN_LENGTH)],
+        validators=[MinLengthValidator(FIRST_NAME_MIN_LENGTH), validate_isalpha],
         null=False,
         blank=False
     )
 
     last_name = models.CharField(
         max_length=LAST_NAME_MAX_LENGTH,
-        validators=[MinLengthValidator(LAST_NAME_MIN_LENGTH)],
+        validators=[MinLengthValidator(LAST_NAME_MIN_LENGTH), validate_isalpha],
         null=False,
         blank=False
     )
@@ -44,7 +45,8 @@ class HwStoreUser(auth_models.AbstractUser):  # napravi validatori na imenata
 class PhoneNumbersUserModel(models.Model):  # napravi validatori za telefonnite nomera
     phone = models.CharField(
         max_length=13,
-        default=None
+        default=None,
+        validators=[validate_phone_number, ]
     )
 
     user = models.ForeignKey(
