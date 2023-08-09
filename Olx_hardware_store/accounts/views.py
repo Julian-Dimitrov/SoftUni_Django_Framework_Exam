@@ -32,7 +32,7 @@ class LogoutUserView(auth_views.LogoutView):
     pass
 
 
-class ProfileDetailsView(views.DetailView):
+class DetailsProfileView(views.DetailView):
     model = HwStoreUser
     template_name = 'accounts/profile/details_profile.html'
 
@@ -43,7 +43,7 @@ class ProfileDetailsView(views.DetailView):
         return context
 
 
-class ProfileEditView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
+class EditProfileView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
     model = HwStoreUser
     form_class = EditProfileForm
     template_name = 'accounts/profile/edit_profile.html'
@@ -62,7 +62,7 @@ class ProfileEditView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
         return redirect('forbidden')
 
 
-class ProfileDeleteView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
+class DeleteProfileView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
     model = HwStoreUser
     template_name = 'accounts/profile/delete_profile.html'
     success_url = reverse_lazy('register_user')
