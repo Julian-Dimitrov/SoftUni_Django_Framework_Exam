@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 from .forms import RegisterUserForm, EditProfileForm, PhoneNumbersUserForm
 from .models import HwStoreUser
+from Olx_hardware_store.permissions import AuthUserPermissions
 
 
 class ForbiddenView(views.View):
@@ -36,14 +37,14 @@ class DetailsProfileView(views.DetailView):
     model = HwStoreUser
     template_name = 'accounts/profile/details_profile.html'
 
-    def get_context_data(self, **kwargs):  # tova ni dava da imame dadenite tools za user-a
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         context['tools'] = self.request.user.tool_set.all()
         return context
 
 
-class EditProfileView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
+class EditProfileView(AuthUserPermissions, views.UpdateView):
     model = HwStoreUser
     form_class = EditProfileForm
     template_name = 'accounts/profile/edit_profile.html'
@@ -55,23 +56,11 @@ class EditProfileView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
-    def has_permission(self):
-        return self.kwargs['pk'] == self.request.user.pk
 
-    def handle_no_permission(self):
-        return redirect('forbidden')
-
-
-class DeleteProfileView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
+class DeleteProfileView(AuthUserPermissions, views.DeleteView):
     model = HwStoreUser
     template_name = 'accounts/profile/delete_profile.html'
     success_url = reverse_lazy('register_user')
-
-    def has_permission(self):
-        return self.kwargs['pk'] == self.request.user.pk
-
-    def handle_no_permission(self):
-        return redirect('forbidden')
 
 
 @login_required

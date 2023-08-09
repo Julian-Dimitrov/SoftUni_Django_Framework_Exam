@@ -7,7 +7,7 @@ from datetime import datetime
 UserModel = get_user_model()
 
 
-class Tool(models.Model):  # napravi created_on
+class Tool(models.Model):
     name = models.CharField(
         max_length=50
     )

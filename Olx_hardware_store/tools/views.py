@@ -5,6 +5,7 @@ from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 from .forms import AddToolForm
 from .models import Tool
+from Olx_hardware_store.permissions import AuthUserPermissions
 
 
 @login_required
@@ -32,7 +33,7 @@ class DetailsToolView(views.DetailView):
     template_name = 'tools/details_tool.html'
 
 
-class EditToolView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
+class EditToolView(AuthUserPermissions, views.UpdateView):
     model = Tool
     form_class = AddToolForm
     template_name = 'tools/edit_tool.html'
@@ -44,11 +45,8 @@ class EditToolView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
     def has_permission(self):
         return self.get_object().user == self.request.user
 
-    def handle_no_permission(self):
-        return redirect('forbidden')
 
-
-class DeleteToolView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
+class DeleteToolView(AuthUserPermissions, views.DeleteView):
     model = Tool
     template_name = 'tools/delete_tool.html'
 
@@ -58,6 +56,3 @@ class DeleteToolView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
 
     def has_permission(self):
         return self.get_object().user == self.request.user
-
-    def handle_no_permission(self):
-        return redirect('forbidden')
