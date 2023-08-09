@@ -9,17 +9,12 @@
 </head>
 <body>
 
-<h1>Profile delete</h1>
+<h1>Contacts</h1>
 
-<form action="{% url 'profile_delete' object.pk %}" method="post">
+<form action="{% url 'contacts_profile' user.pk %}" method="post">
     {% csrf_token %}
-    {{ form }}
-    <h1>
-        Are you sure you want to delete your profile?
-        Any changes are irreversible.
-    </h1>
-
-    <button>Delete profile</button>
+    {{ form.as_p }}
+    <button>Submit</button>
 </form>
 
 </body>

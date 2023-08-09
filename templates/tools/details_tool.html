@@ -36,7 +36,7 @@
     {% if request.user.is_authenticated %}
         <li>
             <a>Seller: {{ tool.user }}</a>
-            <a href="{% url 'profile_details' tool.user.pk %}">See user's profile.</a>
+            <a href="{% url 'details_profile' tool.user.pk %}">See user's profile.</a>
         </li>
     {% else %}
         <a>Seller: {{ tool.user }}</a>

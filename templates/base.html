@@ -18,7 +18,7 @@
             <a>Welcome {{ request.user.first_name }} {{ request.user.last_name }}</a>
         </li>
         <li>
-            <a href="{% url 'profile_details' user.pk %}">Profile details</a>
+            <a href="{% url 'details_profile' user.pk %}">Profile details</a>
         </li>
         <li>
             <a href="{% url 'add_tool' %}">Add tool</a>

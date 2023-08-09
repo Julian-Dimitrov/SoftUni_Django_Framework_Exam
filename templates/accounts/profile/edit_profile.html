@@ -11,13 +11,13 @@
 
 <h1>Profile edit</h1>
 
-<form action="{% url 'profile_edit' object.pk %}" method="post">
+<form action="{% url 'edit_profile' object.pk %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <div>
         <button>Submit changes</button>
         or
-        <a href="{% url 'profile_delete' object.pk %}">Delete profile</a>
+        <a href="{% url 'delete_profile' object.pk %}">Delete profile</a>
     </div>
 </form>
 

@@ -18,7 +18,7 @@ def add_tool(request):
             tool.user = request.user
             tool.save()
 
-            return redirect('profile_details', pk=request.user.pk)
+            return redirect('details_profile', pk=request.user.pk)
 
     context = {
         "form": form,
@@ -39,7 +39,7 @@ class EditToolView(auth_mixins.PermissionRequiredMixin, views.UpdateView):
 
     def get_success_url(self):
         profileid = self.request.user.id
-        return reverse_lazy('profile_details', kwargs={'pk': profileid})
+        return reverse_lazy('details_profile', kwargs={'pk': profileid})
 
     def has_permission(self):
         return self.get_object().user == self.request.user
@@ -54,7 +54,7 @@ class DeleteToolView(auth_mixins.PermissionRequiredMixin, views.DeleteView):
 
     def get_success_url(self):
         profileid = self.request.user.pk
-        return reverse_lazy('profile_details', kwargs={'pk': profileid})
+        return reverse_lazy('details_profile', kwargs={'pk': profileid})
 
     def has_permission(self):
         return self.get_object().user == self.request.user
