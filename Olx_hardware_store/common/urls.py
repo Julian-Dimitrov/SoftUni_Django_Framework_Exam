@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import ToolsListView
+from .views import ListToolsView
 
 urlpatterns = [
-    path('', ToolsListView.as_view(), name='main_page'),
+    path('', ListToolsView.as_view(), name='main_page'),
 ]

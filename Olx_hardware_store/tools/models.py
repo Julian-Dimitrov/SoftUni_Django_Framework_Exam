@@ -31,6 +31,10 @@ class Tool(models.Model):  # napravi created_on
         decimal_places=2
     )
 
+    created_on = models.DateTimeField(
+        auto_now_add=datetime.now()
+    )
+
     last_edit = models.DateTimeField(
         auto_now=datetime.now()
     )

@@ -4,10 +4,11 @@ from Olx_hardware_store.tools.models import Tool
 from .forms import SearchForm
 
 
-class ToolsListView(views.ListView):
+class ListToolsView(views.ListView):
     template_name = 'common/main_page.html'
     model = Tool
     paginate_by = 4
+    ordering = ['-created_on', ]
 
     def get_queryset(self):
         queryset = super().get_queryset()
