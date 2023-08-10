@@ -29,7 +29,7 @@ class RegisterUserForm(auth_forms.UserCreationForm):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = HwStoreUser
-        fields = ['first_name', 'last_name', 'profile_bio', 'age']
+        fields = ['first_name', 'last_name', 'profile_bio', ]
 
 
 class PhoneNumbersUserForm(forms.ModelForm):

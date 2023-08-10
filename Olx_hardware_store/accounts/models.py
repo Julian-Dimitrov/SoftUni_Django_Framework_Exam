@@ -37,11 +37,6 @@ class HwStoreUser(auth_models.AbstractUser):
         blank=True
     )
 
-    age = models.IntegerField(
-        null=True,
-        blank=True
-    )
-
     created_on = models.DateTimeField(
         auto_now_add=datetime.now()
     )
