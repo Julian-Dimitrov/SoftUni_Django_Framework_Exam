@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
-from django.contrib.auth import mixins as auth_mixins
 from .forms import AddToolForm
 from .models import Tool
 from Olx_hardware_store.permissions import AuthUserPermissions
